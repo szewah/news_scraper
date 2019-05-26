@@ -12,14 +12,14 @@ HTML, CSS, Bootstrap, JQuery, Javascript, Node.js, Express.js, MongoDB, Mongoose
 
 ## To use
 
-``
+```
 mkdir news_scraper
 cd news_scraper
 npm init
 npm install
 nodemon server
 
-``
+```
 
 ## Acknowledgement
 Thanks to NPR and the instructors and teaching assistants at Columbia Univeristy Coding Bootcamp.
