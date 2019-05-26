@@ -1,0 +1,36 @@
+<div id="savedArticles" class="container">
+    {{#each savedArticles}}
+        <a href="{{link}}"><h3>{{title}}</h3></a>  
+        <p>{{summary}}</p>
+        <button type="button" class="btn btn-info deleteBtn" data-id="{{id}}" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        <button type="button" class="btn btn-info commentBtn" data-id="{{id}}" data-notes="{{comment}}" data-toggle="modal" data-target="#commentModal">Comment</button>
+        <br>
+        <br>
+    {{/each}}
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body" style="text-align: center">
+                <h5>Your article has been deleted</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body" style="text-align: center">
+                <h5>Your comment has been added</h5>
+            </div>
+        </div>
+    </div>
+</div>

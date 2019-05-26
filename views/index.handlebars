@@ -1,0 +1,23 @@
+<div id="articlesBody" class="container">            
+    {{#each articles}}
+    <a class="artLink" href={{link}}><h3>{{title}}</h3></a>
+    <p>{{summary}}</p>  
+    <button type="button" class="btn btn-info saveArticleButton" data-id={{id}} data-toggle="modal" data-target="#saveModal">
+    Save</button>
+    <br>
+    <br>
+    {{/each}}
+</div>
+
+<div class="modal fade" id="saveModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body" style="text-align: center">
+                <h5>Your article has been saved</h5>
+            </div>
+        </div>
+    </div>
+</div>
