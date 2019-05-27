@@ -15,7 +15,6 @@ HTML, CSS, Bootstrap, JQuery, Javascript, Node.js, Express.js, MongoDB, Mongoose
 ```
 mkdir news_scraper
 cd news_scraper
-npm init
 npm install
 nodemon server
 

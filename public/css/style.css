@@ -1,0 +1,6 @@
+#bodyinput,
+#titleinput {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px dotted lightgray;
+}

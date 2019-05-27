@@ -9,7 +9,7 @@
     {{/each}}
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
@@ -22,15 +22,19 @@
     </div>
 </div>
 
-<div class="modal fade" id="commentModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-body" style="text-align: center">
-                <h5>Your comment has been added</h5>
-            </div>
-        </div>
+
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add a comment</h5>
+      </div>
+      <div class="modal-body commentModalBody"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info saveNoteBtn" data-dismiss="modal">Save</button>
+        <div class="alertDiv"></div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>

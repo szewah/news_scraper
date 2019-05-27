@@ -21,7 +21,7 @@ router.get("/articles", (req, res) => {
     });
 });
 
-//Render the saved page
+//Show the saved page
 router.get("/saved", (req, res) => {
     Article.find({ saved: true }, (error, docs) => {
         if (error) {
@@ -66,6 +66,7 @@ router.get("/scraped", (req, res) => {
     });
 });
 
+//Save the article
 router.put("/saved/article/:id", (req, res) => {
     let articleId = req.params.id;
 
@@ -75,7 +76,8 @@ router.put("/saved/article/:id", (req, res) => {
     });
 });
 
-router.put("/delete/article/:id", function(req, res) {
+//Delete the saved article
+router.put("/delete/article/:id", (req, res) => {
     let articleId = req.params.id;
   
     Article.findOneAndUpdate({ _id: articleId },{ $set: { saved: false }})
@@ -84,6 +86,41 @@ router.put("/delete/article/:id", function(req, res) {
     });
   });
 
+//Get all the comments
+router.get("/comments/", (req, res) => {
+    Comment.find({}).then((response) => {
+        res.json(response);
+    });
+});
+
+//Get one comment
+router.get("/comments/:id", (req, res) => {
+    let articleId = req.params.id;
+
+    Article.findOne({_id: articleId})
+    .populate("comment")
+    .then((result) => {
+        res.json(result);
+    });
+});
+
+//Post a comment
+router.post("/comments/:id", (req, res) => {
+    Comment.create(req.body)
+    .then((dbComment) => {
+        return Article.findOneAndUpdate(
+            {_id: req.params.id},
+            {comment: dbComment_id},
+            {new: true}
+        );
+    })
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
 
 
 module.exports = router;
