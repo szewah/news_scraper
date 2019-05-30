@@ -2,7 +2,7 @@ $("#scrapeBtn").on("click", (event) => {
     
     event.preventDefault();
 
-    $.ajax("/articles", {
+    $.ajax("/scraped", {
         type: "GET"
     }).then(() => {
         console.log("Success!");
