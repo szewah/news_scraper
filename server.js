@@ -18,7 +18,7 @@ app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 //Connect to MONGODB
-let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newscraper";
+let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScraper";
 mongoose.connect(MONGODB_URI, {useNewUrlParser:true});
 
 //Bring in the routes
