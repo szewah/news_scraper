@@ -1,8 +1,8 @@
 ## About
 A simple fullstack news scraper web app. 
 
-Github repository: https://github.com/szewah/news_scraper
-Heroku: https://guarded-thicket-53896.herokuapp.com/
+- Github repository: https://github.com/szewah/news_scraper
+- Heroku: https://guarded-thicket-53896.herokuapp.com/
 
 
 ## Here's how the app works
