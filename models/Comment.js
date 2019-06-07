@@ -5,8 +5,8 @@ const CommentSchema = new Schema ({
     title: {
         type: String
     },
-    body: {
-        type: String, 
+    comment: {
+        type: String 
     }
 });
 

@@ -3,7 +3,7 @@
         <a href="{{link}}"><h3>{{title}}</h3></a>  
         <p>{{summary}}</p>
         <button type="button" class="btn btn-info deleteBtn" data-id="{{id}}" data-toggle="modal" data-target="#deleteModal">Delete</button>
-        <button type="button" class="btn btn-info commentBtn" data-id="{{id}}" data-notes="{{comment}}" data-toggle="modal" data-target="#commentModal">Comment</button>
+        <button type="button" class="btn btn-info commentBtn" data-id="{{id}}" data-toggle="modal" data-target="#commentModal">Comment</button>
         <br>
         <br>
     {{/each}}
@@ -26,9 +26,10 @@
 <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header commentModalHeader">
         <h5 class="modal-title">Add a comment</h5>
       </div>
+      <div class="container previous-comments-list mt-2"></div>
       <div class="modal-body commentModalBody"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info saveNoteBtn" data-dismiss="modal">Save</button>

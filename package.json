@@ -1,7 +1,7 @@
 {
   "name": "scraper",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple fullstack news scraper web app.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,5 +16,13 @@
     "express-handlebars": "^3.1.0",
     "mongoose": "^5.5.11",
     "morgan": "^1.9.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szewah/news_scraper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/szewah/news_scraper/issues"
+  },
+  "homepage": "https://github.com/szewah/news_scraper#readme"
 }

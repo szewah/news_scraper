@@ -66,7 +66,7 @@ router.get("/scraped", (req, res) => {
     });
 });
 
-//Save the article
+//Update to "saved" article
 router.put("/saved/article/:id", (req, res) => {
     let articleId = req.params.id;
 
@@ -76,7 +76,7 @@ router.put("/saved/article/:id", (req, res) => {
     });
 });
 
-//Delete the saved article
+//Update to delete the saved article
 router.put("/delete/article/:id", (req, res) => {
     let articleId = req.params.id;
   
@@ -87,39 +87,54 @@ router.put("/delete/article/:id", (req, res) => {
   });
 
 //Get all the comments
-router.get("/comments/", (req, res) => {
+router.get("/comments", (req, res) => {
     Comment.find({}).then((response) => {
+        console.log("This is finding ALL results " + response);
         res.json(response);
     });
 });
 
-//Get one comment
-router.get("/comments/:id", (req, res) => {
+//Get one comment from article
+router.get("/saved/:id", (req, res) => {
     let articleId = req.params.id;
-
     Article.findOne({_id: articleId})
     .populate("comment")
-    .then((result) => {
-        res.json(result);
+    .then(dbComment => {
+        // res.send("succeeded");
+        res.json(dbComment);
+    })
+    .catch(err => {
+        res.json(err);
     });
 });
 
 //Post a comment
-router.post("/comments/:id", (req, res) => {
+router.post("/saved/:id", (req, res) => {
     Comment.create(req.body)
-    .then((dbComment) => {
+    .then(dbComment => {
         return Article.findOneAndUpdate(
             {_id: req.params.id},
-            {comment: dbComment_id},
+            { $push: {comment: dbComment._id}},
             {new: true}
         );
     })
     .then((result) => {
+        console.log(result);
         res.json(result);
     })
     .catch((err) => {
         res.json(err);
     });
+});
+
+router.delete("/comments/:id", (req,res) => {
+    Comment.findByIdAndRemove({_id: req.params.id})
+    .then(dbComment => {
+        res.json(dbComment);
+    })
+    .catch((err) => {
+        res.json(err);
+    })
 });
 
 
