@@ -4,3 +4,14 @@
     border-radius: 5px;
     border: 1px dotted lightgray;
 }
+
+img {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    float: right;
+}
+
+li {
+    list-style: none;
+}

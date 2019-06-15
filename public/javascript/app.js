@@ -16,7 +16,7 @@ $(".saveArticleButton").on("click", function(event) {
 
     let articleId = $(this).attr("data-id");
 
-    $.ajax("/saved/article/" + articleId, {
+    $.ajax("/saved/" + articleId, {
         type: "PUT"
     }).then(() => {
         console.log("Saved");
@@ -29,10 +29,9 @@ $(".deleteBtn").on("click", function(event) {
 
     let articleId = $(this).attr("data-id");
 
-    $.ajax("/delete/article/" + articleId, {
+    $.ajax("/delete/" + articleId, {
         type: "PUT"
     }).then(() => {
-        console.log("Deleted");
         location.reload();
     });
 });
@@ -44,88 +43,99 @@ $(".commentBtn").on("click", function(event) {
     let articleId = $(this).attr("data-id");
     //Empty the body of the comment modal
     $(".commentModalBody").empty();
-    $(".noteAlert").remove();
+    $(".previous-comments-list").remove();
+    
     //Get request to the 
     $.ajax("/saved/" + articleId, {
         type: "GET"
     }).then(function(result) {
-        //Modal result and adding list tag
-        $(".commentModalBody").append("<p>" + result.title + "<p>");
-
-        //Create form for modal
+        // for (var i = 0; i < result.comment.length; i++) {
+        //     console.log("These are the comments " + result.comment[i]);
+        // }
+        console.log(result.comment, result.comment.length);
+        //Modal result and adding card div
+        $(".commentModalBody").append("<h5>").text("Notes for article: " + articleId);
+        $(".commentModalBody").append("<br>");
+        $(".commentModalBody").append("<div class ='card mt-2 mb-3' id='previous-comments-list'>");
+        console.log(result);
+        //only console loggin the id of the comment, not the comment itself;
+        //Create comment input form for modal
         let newForm = $("<form>");
-    
-        //Create comment title
-        let formHead = $("<div>", {class: 'form-group'});
-        let formHeadLabel = $("<label for='titleinput'>");
-        let formHeadinput = $("<input id='titleinput' name='title' placeholder='Title'>");
-        formHead.append(formHeadLabel);
-        formHead.append(formHeadinput);
     
         //Create comment body
         let formBody = $("<div>", {class: 'form-group'});
         let formBodyLabel = $("<label for='bodyinput'>")
-        let textArea = $("<textarea>", {id:'bodyinput', rows:'3', name: 'textArea', placeholder:'Comment'});     
+        let textArea = $("<textarea>", {id:'bodyinput', rows:'10', name: 'textArea', placeholder:'Add a new comment'});     
         formBody.append(formBodyLabel);
         formBody.append(textArea);
         
+        //Add the article id to the save note button
         $(".saveNoteBtn").attr("data-id", result._id);
         //Attach title and body to the form
-        newForm.append(formHead, formBody);
+        newForm.append(formBody);
         //Attach form to the modal body
         $(".commentModalBody").append(newForm);
 
-        let commentDiv = $(".previous-comments-list");
-        let comment = $("<p>");
-        comment.append(result.comment.comment);
-        commentDiv.append(comment);
+        //Build a comments array
+        let commentsArray = [];
+        let currentComment;
 
-        //if there are comments, list them out to $(".noteList");
+        if (!result.comment.length) {
+            currentComment = $("<li class='list-group-item'>No comment yet</li>")
+            commentsArray.push(currentComment);
+        } 
+        else {
+            for (var i = 0; i < result.comment.length; i++) {
+                console.log(result.comment[i]);
+                // currentComment = $("<li class='list-group-item'>")
+                // .text(result.comment[i])
+                // .append($("<button class='btn btn-danger note-delete'>x</button>"));
+            
+                // currentNote.children("button").data("_id", result.comment[i]._id);
+                // commentsArray.push(currentComment);
+            }
+        }
+         $("#previous-comments-list").append(commentsArray);
     });
 });
 
 
 $(".saveNoteBtn").on("click", function(event) {
 
-    console.log("Save note button clicked");
     event.preventDefault();
     //Grab the id of the article
     let articleId = $(this).attr("data-id");
-
-    //New comment object to add values to. 
+    //New comment object to add value to. 
     const newComment = {
-        title: $("#titleinput").val(),
         comment: $("#bodyinput").val()
     }
 
     //If the fields have been filled out properly, then save it to the article
-    if (newComment.title && newComment.comment) {``
+    if (newComment.comment) {
         $.post("/saved/" + articleId, newComment)
         .then(function(result) {
-            console.log("New comment posted successfully.");
-        });
-        $.get("/saved/" + articleId)
-        .then(function(result) {
             console.log(result.comment);
-        })
-    } else {
+        });
+    } 
+    else {
         alert("Please fill out all the fields")
     };
     //Empty the input values
-    $("#titleinput").val("");
     $("#bodyinput").val("");
 });
 
+$(document).on("click", ".note-delete", function(event) {
+    
+    // let commentToDelete = $(this).attr("data-id");
+    // console.log(noteToDelete);
 
-function deleteComment() {
-    $(".deleteCommentBtn").on("click", function(event) {
-        let articleId = $(this).attr("data-id");
-        $.ajax("/comments/" + articleId, {
-            type: "DELETE",
-            success: function(result) {
-                console.log("Deleted");
-                location.reload();
-            }
-        });
-    });
-};
+    // let parentDiv = event.target.parentElement.parentElement;
+    
+    // $.ajax({
+    //     url: "/comments/" + commentToDelete,
+    //     method: "DELETE"
+    // }).then(function() {
+    //     console.log("Deleted");
+    //     parentDiv.remove();
+    // })
+})
